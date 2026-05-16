@@ -1,75 +1,36 @@
 // NASA Brick; NESC-RP-12-00770, V1.0
 #pragma once
-#include <array>
+#include "Model.hpp"
 #include "units/Units.hpp"
+#include <array>
 
-enum Axis
-{
-  x = 0,
-  y = 1,
-  z = 2
-};
-class Brick
+class Brick : public Model
 {
 public:
-  Brick()
+  Brick() : 
+  Model (
+    "Brick",
+    Units::SlugFtSqToKgMSq(0.001894220),
+    Units::SlugFtSqToKgMSq(0.006211019),
+    Units::SlugFtSqToKgMSq(0.007194665),
+    Units::SlugFtSqToKgMSq(0.0),
+    Units::SlugFtSqToKgMSq(0.0),
+    Units::SlugFtSqToKgMSq(0.0),
+    Units::SlugsToKg(0.155404754),
+    Units::MetersToFeet(0.0),
+    Units::MetersToFeet(0.0),
+    Units::MetersToFeet(0.0),
+    Units::SqFeetToSqMeters(0.22222),
+    Units::FeetToMeters(0.33333),
+    Units::FeetToMeters(0.66667),
+    0.0, 0.0, 0.0,
+    0.0, 0.01, 0.0, 0.0, 0.0, 0.0, -1.0,
+    0.0, -1.0, 0.0, -1.0, 
+    {Units::InchesToMeters(8), 
+    Units::InchesToMeters(4), 
+    Units::InchesToMeters(2.25)})
   {
-    m_modelData[0] = m_I[x][x] = Units::SlugFtSqToKgMSq(0.001894220);
-    m_modelData[1] = m_I[y][y] = Units::SlugFtSqToKgMSq(0.006211019);
-    m_modelData[2] = m_I[z][z] = Units::SlugFtSqToKgMSq(0.007194665);
-    m_modelData[3] = m_I[x][y] = 0.0;
-    m_modelData[4] = m_I[y][z] = 0.0;
-    m_modelData[5] = m_I[z][x] = 0.0;
-    m_modelData[6] = m_mass = Units::SlugsToKg(0.155404754);
-    m_modelData[7] = m_cgOffset[x] = 0.0;
-    m_modelData[8] = m_cgOffset[y] = 0.0;
-    m_modelData[9] = m_cgOffset[z] = 0.0;
-    m_modelData[10] = m_Aref = Units::SqFeetToSqMeters(0.22222);
-    m_modelData[11] = m_span = Units::FeetToMeters(0.33333);
-    m_modelData[12] = m_chord = Units::FeetToMeters(0.66667);
-    m_modelData[13] = m_length_body = 0.0;
-    m_modelData[14] = m_length_nose = 0.0;
-    m_modelData[15] = m_diameter = 0.0;
-    m_modelData[16] = m_C_lift = 0.0;
-    m_modelData[17] = m_C_drag = 0.01;
-    m_modelData[18] = m_C_sideforce = 0.0;
-    m_modelData[19] = m_C_l = 0.0;
-    m_modelData[20] = m_C_m = 0.0;
-    m_modelData[21] = m_C_n = 0.0;
-    m_modelData[22] = m_C_lp = -1.0;
-    m_modelData[23] = m_C_lr = 0.0;
-    m_modelData[24] = m_C_mq = -1.0;
-    m_modelData[25] = m_C_np = 0.0;
-    m_modelData[26] = m_C_nr = -1.0;
-  }
-  void GetModel(std::array<double, 27>& dataTable)
-  {
-    for (int i = 0; i < dataTable.size(); ++i)
-    {
-      dataTable[i] = m_modelData[i];
-    }
-  }
 
-private:
-  std::array<double, 27> m_modelData{0.0};
-  double m_I[3][3]{0.0};
-  double m_mass{0.0};
-  double m_cgOffset[3]{0.0};
-  double m_length_body{0.0};
-  double m_length_nose{0.0};
-  double m_diameter{0.0};
-  double m_Aref{0.0};
-  double m_span{0.0};
-  double m_chord{0.0};
-  double m_C_lift{0.0};
-  double m_C_drag{0.0};
-  double m_C_sideforce{0.0};
-  double m_C_l{0.0};
-  double m_C_m{0.0};
-  double m_C_n{0.0};
-  double m_C_lp{0.0};
-  double m_C_lr{0.0};
-  double m_C_mq{0.0};
-  double m_C_np{0.0};
-  double m_C_nr{0.0};
+  }
+  ~Brick() = default;
 };
